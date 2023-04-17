@@ -1,0 +1,15 @@
+<div class="form-group">
+  <label for="name">Ad</label>
+  <input #name type="text" class="form-control" name="name" placeholder="Adınız">
+</div>
+<div class="form-group">
+  <label for="surname">Soyad</label>
+  <input #surname type="text" class="form-control" name="surname"  placeholder="Soyadınız">
+</div>
+<div class="form-group">
+  <div class="custom-control custom checkbox">
+    <input #isActive type="checkbox" class="custom-control-input" id="isActive">
+    <label for="isActive" class="custom-control-label" ></label>
+  </div>
+  <button class="btn btn-primary" (click)="addTeacher(name.value,surname.value,isActive.checked);name.value='';surname.value='';">Kaydet</button>
+</div>

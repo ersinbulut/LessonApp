@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-3" style="margin-top: 5px;">
+      <mat-form-field>
+        <input type="text" placeholder="Öğretmen Seçiniz" matInput [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" #teacher>
+          <mat-option *ngFor="let item of getTeacher()" [value]="item.name+' '+item.surname">
+            {{ item.name +" "+ item.surname }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div class="col-3">
+      <label for="">Ders Seçiniz</label>
+      <select class="form-control" #lesson>
+        <option value="">Select </option>
+        <option *ngFor="let item of getLesson()" [value]="item.name">{{item.name}}</option>
+      </select>
+    </div>
+    <div class="col-3">
+      <label for="">Sınıf Seçiniz</label>
+      <select class="form-control" #classes>
+        <option value="">Select </option>
+        <option *ngFor="let item of getClass()" [value]="item.name">{{item.name}}</option>
+      </select>
+    </div>
+    <div class="col-3">
+      <label for="">Saat Seçiniz</label>
+      <select class="form-control" #hour>
+        <option value="">Select </option>
+        <option *ngFor="let item of getHour()" [value]="item.name">{{item.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row   mt-4">
+    <div class="col-6 text-end">
+      <button class="btn btn-secondary">Yenile</button>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-success" (click)="addItem(0,teacher,lesson,classes,hour)">Kaydet</button>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="container">
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Öğretmen</th>
+      <th>Ders</th>
+      <th>Sınıf</th>
+      <th>Saat</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let p of getLessonPlan()">
+      <td>{{p.id}}</td>
+      <td>{{p.TeacherName}}</td>
+      <td>{{p.LessonName}}</td>
+      <td>{{p.ClassName}}</td>
+      <td>{{p.HourName}}</td>
+      <td>
+        <button class="btn btn-primary">Düzenle</button>
+        <button class="btn btn-danger">Sil</button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+

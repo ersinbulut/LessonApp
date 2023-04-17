@@ -1,0 +1,39 @@
+
+<div class="container mt-3" >
+  <div class="row">
+    <div class="col-md-7">
+      <h3 class="bg-primary text-white p-2">Öğretmenler</h3>
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of teachers" [class.bg-secondary]="p.isActive==false">
+        <td>{{p.Teacherid}}</td>
+        <td>{{p.name}}</td>
+        <td>{{p.surname}}</td>
+        <td>
+          <button class="btn btn-primary" (click)="onSelectTeacher(p)">Düzenle</button>
+          <button class="btn btn-danger" (click)="deleteTeacher(p)">Sil</button>
+        </td>
+      </tr>
+
+    </tbody>
+</table>
+
+    </div>
+    <div class="col-md-5">
+      <teacher-details [teacher]="selectedTeacher"></teacher-details>
+      <hr class="my-3">
+      <teacher-form [teachers]="teachers"></teacher-form>
+
+    </div>
+  </div>
+</div>
+
+

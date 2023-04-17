@@ -1,0 +1,35 @@
+<div class="container mt-3" >
+  <div class="row">
+    <div class="col-md-7">
+      <h3 class="bg-primary text-white p-2">Dersler</h3>
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Ders Adı</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of lesson">
+        <td>{{p.LessonID}}</td>
+        <td>{{p.name}}</td>
+        <td>
+          <button class="btn btn-primary" (click)="onSelectLesson(p)">Düzenle</button>
+          <button class="btn btn-danger" (click)="deleteLesson(p)">Sil</button>
+        </td>
+      </tr>
+
+    </tbody>
+</table>
+
+    </div>
+    <div class="col-md-5">
+      <!-- <teacher-details [lesson]="selectedLesson"></teacher-details> -->
+      <hr class="my-3">
+      <!-- <teacher-form></teacher-form> -->
+
+    </div>
+  </div>
+</div>
+
