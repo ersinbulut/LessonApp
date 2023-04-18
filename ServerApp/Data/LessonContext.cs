@@ -18,5 +18,6 @@ namespace ServerApp.Data
         public DbSet<Hour> Hours { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<LessonPlan> LessonPlans { get; set; }
+        public DbSet<Customer> Customers { get; set; }
     }
 }
