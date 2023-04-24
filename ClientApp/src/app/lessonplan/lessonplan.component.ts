@@ -43,7 +43,7 @@ export class LessonplanComponent {
   // }
 
   getLessonPlan(){
-    return this.lessonplan.lessonplans;
+    return this.lessonplanservice.getLessonPlan();
   }
 
   getTeacher(){

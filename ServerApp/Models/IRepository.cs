@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace ServerApp.Models
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        T GetById(int id);
-        void Add(T entity);
-        void Update(T entity);
-        void Delete(int id);
+        void TAdd(T t);
+        void TDelete(T t);
+        void TUpdate(T t);
+        List<T> TGetList();
+        T TGetByID(int id);
     }
 }

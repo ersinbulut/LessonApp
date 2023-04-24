@@ -17,75 +17,40 @@ namespace ServerApp.Controllers
     [Route("api/[controller]")]
     public class TeacherController : ControllerBase
     {
-      private readonly LessonContext _context;
-      public TeacherController(LessonContext context)
-      {
-         _context=context;
-      }
-
-       //localhost:5254/api/teacher
-       [HttpGet]
-       public async Task<ActionResult> GetTeachers()
-       {
-          var teacher=await _context.Teachers.Select(p=> new TeacherDTO(){
-            TeacherID=p.TeacherID,
-            Name=p.Name,
-            Surname=p.Surname
-          }).ToListAsync();
-          return Ok(teacher);
-       }
-       //localhost:5254/api/teacher/2
-       [HttpGet("{id}")]
-       public async Task<ActionResult> GetTeacher(int id)
-       {
-           var p=await _context.Teachers.FirstOrDefaultAsync(i=>i.TeacherID == id);
-           if(p==null) 
-           {
-            return NotFound();
-           }  
-           return Ok(p);
-       }
-        [HttpPost]
-        public async Task<IActionResult> CreateTeacher(Teacher entity)
+        private readonly IRepository<Teacher> _repository;
+        public TeacherController(IRepository<Teacher> repository)
         {
-            _context.Teachers.Add(entity);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetTeacher),new {id=entity.TeacherID},entity);
+            _repository = repository;
+            
+        }
+       //localhost:5254/api/teacher
+        [HttpGet]
+        public IEnumerable<Teacher> GetTeachers()
+        {
+            return _repository.TGetList();
+        }
+       //localhost:5254/api/teacher/2
+        [HttpGet("{id}")]
+        public Teacher GetTeacher(int id)
+        {
+            return _repository.TGetByID(id);
+        }
+        [HttpPost]
+        public void Post([FromBody] Teacher teacher)
+        {
+            _repository.TAdd(teacher);
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTeacher(int id,Teacher entity)
+        public void Put(int id, [FromBody] Teacher teacher)
         {
-            if(id!=entity.TeacherID)
-            {
-                return BadRequest();
-            }
-            var teacher=await _context.Teachers.FindAsync(id);
-            if(teacher==null)
-            {
-                return NotFound();
-            }
-            teacher.Name=entity.Name;
-            teacher.Surname=entity.Surname;
-            try{
-                await _context.SaveChangesAsync();
-            }catch(Exception e){
-                Console.WriteLine(e.Message);
-                return NotFound();
-            }
-            return NoContent();
+            teacher.TeacherID = id;
+            _repository.TUpdate(teacher);
         }
          //localhost:5254/api/teacher/2
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTeacher(int id)
+        public void Delete(Teacher teacher)
         {
-            var teacher=await _context.Teachers.FindAsync(id);
-            if(teacher==null)
-            {
-                return NotFound();
-            }
-            _context.Teachers.Remove(teacher);
-            await _context.SaveChangesAsync();
-            return NoContent();
+           _repository.TDelete(teacher);
         }
     }
 }
