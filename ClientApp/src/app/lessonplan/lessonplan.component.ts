@@ -11,30 +11,31 @@ import { lessonPlanService } from '../lessonplan.service';
   templateUrl: './lessonplan.component.html',
   styleUrls: ['./lessonplan.component.css']
 })
-export class LessonplanComponent {
+export class LessonplanComponent  {
   teacher=new TeacherModel();
   lesson=new LessonModel();
   class=new ClassModel();
   hour=new HourModel();
   lessonplan=new LessonPlanModel();
+  TeacherName1:any;
 
-  // addItem(Teacher:any,Lesson:any,Class:any,Hour:any){
-  //   console.log(Teacher.value);
-  //   console.log(Lesson.value);
-  //   console.log(Class.value);
-  //   console.log(Hour.value);
-  // }
+  onselect(name:any,surname:any){
+    console.log(name +" "+ surname);
+    this.TeacherName1 = name+" "+surname;
+
+  }
 
   @Input() lessonplans: LessonPlan[] | undefined;
   constructor(private lessonplanservice :lessonPlanService){}
 
-  addItem(id:any,teacher:any,lesson:any,classes:any,hour:any)
+  addItem(id:any,TeacherName:any,LessonName:any,ClassName:any,HourName:any)
   {
-      console.log(teacher.value);
-      console.log(lesson.value);
-      console.log(classes.value);
-      console.log(hour.value);
-    const t=new LessonPlan(0,teacher,lesson,classes,hour);
+      TeacherName=this.TeacherName1;
+      console.log(TeacherName.value);
+      console.log(LessonName.value);
+      console.log(ClassName.value);
+      console.log(HourName.value);
+    const t=new LessonPlan(id,TeacherName.value,LessonName.value,ClassName.value,HourName.value);
     this.lessonplanservice.saveLessonPlan(t);
   }
 
@@ -59,5 +60,9 @@ export class LessonplanComponent {
 
   getHour(){
     return this.hour.hours;
+  }
+
+  deleteLessonPlan(lessonplan:LessonPlan){
+    this.lessonplanservice.deleteLessonPlan(lessonplan);
   }
 }

@@ -14,12 +14,12 @@ export class TeacherDetailsComponent {
 
     constructor(private teacherService :TeacherService){}
 
-  UpdateTeacher(id:number,name:string,surname:string,isActive:boolean)
+  UpdateTeacher(id:string,name:string,surname:string,isActive:boolean)
   {
-    const t=new Teacher(id,name,surname,isActive);
+    const t=new Teacher(parseInt(id),name,surname,isActive);
     this.teacherService.updateTeacher(t)
     .subscribe(result=>{
-      this.teachers.splice(this.teachers.findIndex(x=>x.Teacherid == t.Teacherid),1,t);
+      this.teachers.splice(this.teachers.findIndex(x=>x.teacherid == t.teacherid),1,t);
     });
 
   }

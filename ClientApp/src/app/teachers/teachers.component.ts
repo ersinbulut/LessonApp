@@ -27,11 +27,13 @@ export class TeachersComponent {
 
   onSelectTeacher(teacher:Teacher){
     this.selectedTeacher=teacher;
+    console.log(teacher.teacherid);
+    teacher.name=teacher.name;
   }
 
   deleteTeacher(teacher:Teacher){
     this.teacherService.deleteTeacher(teacher).subscribe(p=>{
-      this.teachers?.splice(this.teachers.findIndex(p=>p.Teacherid==teacher.Teacherid),1)
+      this.teachers?.splice(this.teachers.findIndex(p=>p.teacherid==teacher.teacherid),1)
     });
     this.ngOnInit();
   }

@@ -24,7 +24,7 @@ namespace ServerApp.Models
 
         public void TDelete(Teacher t)
         {
-             var user = _context.Teachers.Find(t.TeacherID);
+             var user = _context.Teachers.Find(t.teacherid);
             _context.Teachers.Remove(user);
             _context.SaveChanges();
         }

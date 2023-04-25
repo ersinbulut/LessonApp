@@ -43,7 +43,7 @@ namespace ServerApp.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Teacher teacher)
         {
-            teacher.TeacherID = id;
+            teacher.teacherid = id;
             _repository.TUpdate(teacher);
         }
          //localhost:5254/api/teacher/2

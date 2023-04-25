@@ -20,6 +20,7 @@ export class lessonPlanService{
   {
     if(lessonplans.id==0)
     {
+      lessonplans.id+=3;
       this.model.lessonplans?.push(lessonplans);
     }
     else{

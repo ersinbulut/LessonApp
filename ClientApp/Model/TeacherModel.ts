@@ -17,13 +17,13 @@ export class TeacherModel{
 }
 
 export class Teacher{
-  Teacherid: number;
+  teacherid: number;
   name:string;
   surname:string;
   isActive:boolean;
 
-  constructor(Teacherid:number,name:string,surname:string,isActive:boolean){
-    this.Teacherid=Teacherid;
+  constructor(teacherid:number,name:string,surname:string,isActive:boolean){
+    this.teacherid=teacherid;
     this.name=name;
     this.surname=surname;
     this.isActive=isActive;

@@ -25,11 +25,12 @@ export class TeacherService {
   }
 
   updateTeacher(teacher:Teacher){
-    return this.http.put<Teacher>(this.baseUrl+'api/teacher/'+teacher.Teacherid,teacher);
+    return this.http.put<Teacher>(this.baseUrl+'api/teacher/'+teacher.teacherid,teacher);
   }
 
   deleteTeacher(teacher:Teacher):Observable<Teacher>{
-    return this.http.delete<Teacher>(this.baseUrl+'api/teacher/'+teacher.Teacherid)
+    // console.log(this.baseUrl+'api/teacher/'+teacher.teacherid);
+    return this.http.delete<Teacher>(this.baseUrl+'api/teacher/'+teacher.teacherid);
   }
 
   // getTeachers(){
@@ -37,16 +38,16 @@ export class TeacherService {
   // }
 
   getTeacherByID(id:number){
-    return this.model.teachers?.find(i=>i.Teacherid==id);
+    return this.model.teachers?.find(i=>i.teacherid==id);
   }
   saveTeacher(teacher:Teacher)
   {
-    if(teacher.Teacherid==0)
+    if(teacher.teacherid==0)
     {
       this.model.teachers?.push(teacher);
     }
     else{
-      const p = this.getTeacherByID(teacher.Teacherid);
+      const p = this.getTeacherByID(teacher.teacherid);
       // p.name=teacher.name;
       // p.surname=teacher.surname;
       // p?.isActive=teacher.isActive;

@@ -2,9 +2,9 @@
   <div class="row mt-3">
     <div class="col-3" style="margin-top: 5px;">
       <mat-form-field>
-        <input type="text" placeholder="Öğretmen Seçiniz" matInput [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" #teacher>
-          <mat-option *ngFor="let item of getTeacher()" [value]="item.name+' '+item.surname">
+        <input type="text"  placeholder="Öğretmen Seçiniz" matInput [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" #TeacherName>
+          <mat-option (click)="onselect(item.name,item.surname)" *ngFor="let item of getTeacher()" [value]="item.name+' '+item.surname">
             {{ item.name +" "+ item.surname }}
           </mat-option>
         </mat-autocomplete>
@@ -12,21 +12,21 @@
     </div>
     <div class="col-3">
       <label for="">Ders Seçiniz</label>
-      <select class="form-control" #lesson>
+      <select class="form-control" #LessonName>
         <option value="">Select </option>
         <option *ngFor="let item of getLesson()" [value]="item.name">{{item.name}}</option>
       </select>
     </div>
     <div class="col-3">
       <label for="">Sınıf Seçiniz</label>
-      <select class="form-control" #classes>
+      <select class="form-control" #ClassName>
         <option value="">Select </option>
         <option *ngFor="let item of getClass()" [value]="item.name">{{item.name}}</option>
       </select>
     </div>
     <div class="col-3">
       <label for="">Saat Seçiniz</label>
-      <select class="form-control" #hour>
+      <select class="form-control" #HourName>
         <option value="">Select </option>
         <option *ngFor="let item of getHour()" [value]="item.name">{{item.name}}</option>
       </select>
@@ -37,7 +37,7 @@
       <button class="btn btn-secondary">Yenile</button>
     </div>
     <div class="col-6">
-      <button class="btn btn-success" (click)="addItem(0,teacher,lesson,classes,hour)">Kaydet</button>
+      <button class="btn btn-success" (click)="addItem(0,TeacherName,LessonName,ClassName,HourName)">Kaydet</button>
     </div>
   </div>
 </div>
@@ -61,7 +61,7 @@
       <td>{{p.HourName}}</td>
       <td>
         <button class="btn btn-primary">Düzenle</button>
-        <button class="btn btn-danger">Sil</button>
+        <button class="btn btn-danger" (click)="deleteLessonPlan(p)">Sil</button>
       </td>
     </tr>
   </table>

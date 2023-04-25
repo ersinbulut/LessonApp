@@ -1,5 +1,5 @@
 <div *ngIf="teacher">
-  <input [value]="teacher.Teacherid" #id type="hidden" name="id">
+  <input [value]="teacher.teacherid" #id type="hidden" name="id">
 <div class="form-group">
   <label for="name">Ad</label>
   <input [value]="teacher.name" #name type="text" class="form-control" name="name" placeholder="Adınız">
@@ -13,6 +13,6 @@
     <input [checked]="teacher.isActive" #isActive type="checkbox" class="custom-control-input" id="isActive">
     <label for="isActive" class="custom-control-label" ></label>
   </div>
-  <button class="btn btn-primary" (click)="UpdateTeacher(1,name.value,surname.value,isActive.checked);">Güncelle</button>
+  <button class="btn btn-primary" (click)="UpdateTeacher(id.value,name.value,surname.value,isActive.checked);">Güncelle</button>
 </div>
 </div>
