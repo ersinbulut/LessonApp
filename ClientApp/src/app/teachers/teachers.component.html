@@ -18,7 +18,7 @@
         <td>{{p.name}}</td>
         <td>{{p.surname}}</td>
         <td>
-          <button class="btn btn-primary" (click)="onSelectTeacher(p)">Düzenle</button>
+          <button class="btn btn-primary" (click)="showAddForm = false" (click)="onSelectTeacher(p)">Düzenle</button>
           <button class="btn btn-danger" (click)="deleteTeacher(p)">Sil</button>
         </td>
       </tr>
@@ -28,9 +28,14 @@
 
     </div>
     <div class="col-md-5">
-      <teacher-details [teacher]="selectedTeacher"></teacher-details>
-      <hr class="my-3">
+      <div *ngIf="!showAddForm">
+        <teacher-details [teacher]="selectedTeacher"></teacher-details>
+      </div>
+      <div *ngIf="showAddForm">
+        <hr class="my-3">
       <teacher-form [teachers]="teachers"></teacher-form>
+      </div>
+
 
     </div>
   </div>

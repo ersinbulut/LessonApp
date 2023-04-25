@@ -2,10 +2,10 @@
   <div class="row mt-3">
     <div class="col-3" style="margin-top: 5px;">
       <mat-form-field>
-        <input type="text"  placeholder="Öğretmen Seçiniz" matInput [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" #TeacherName>
-          <mat-option (click)="onselect(item.name,item.surname)" *ngFor="let item of getTeacher()" [value]="item.name+' '+item.surname">
-            {{ item.name +" "+ item.surname }}
+        <input type="text" #TeacherName placeholder="Öğretmen Seçiniz" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{ option }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>

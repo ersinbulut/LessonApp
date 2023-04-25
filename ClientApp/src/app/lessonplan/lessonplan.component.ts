@@ -5,6 +5,8 @@ import { LessonModel } from 'Model/LessonModel';
 import { LessonPlan, LessonPlanModel } from 'Model/LessonPlanModel';
 import { Teacher, TeacherModel } from 'Model/TeacherModel';
 import { lessonPlanService } from '../lessonplan.service';
+import { FormControl } from '@angular/forms';
+import { Observable, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'lessonplan',
@@ -19,18 +21,28 @@ export class LessonplanComponent  {
   lessonplan=new LessonPlanModel();
   TeacherName1:any;
 
-  onselect(name:any,surname:any){
-    console.log(name +" "+ surname);
-    this.TeacherName1 = name+" "+surname;
-
+  myControl = new FormControl();
+  options: string[] = ['Ersin Bulut', 'Kamil Bulut', 'Mehmet Demir', 'Ali Can','Ceren Yıldız'];
+  filteredOptions: Observable<string[]>;
+  constructor(private lessonplanservice :lessonPlanService){
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map((value: string) => this._filter(value))
+    );
   }
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+
   @Input() lessonplans: LessonPlan[] | undefined;
-  constructor(private lessonplanservice :lessonPlanService){}
+
 
   addItem(id:any,TeacherName:any,LessonName:any,ClassName:any,HourName:any)
   {
-      TeacherName=this.TeacherName1;
       console.log(TeacherName.value);
       console.log(LessonName.value);
       console.log(ClassName.value);

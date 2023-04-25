@@ -10,6 +10,7 @@ import { TeacherService } from '../teacher.service';
 export class TeachersComponent {
   title = 'Öğretmenler';
   selectedTeacher:Teacher | undefined;
+  showAddForm: boolean = true;
 
   teachers:Teacher[] | undefined;
   constructor(private teacherService:TeacherService){ }
